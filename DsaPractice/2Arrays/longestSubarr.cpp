@@ -44,19 +44,48 @@ int longestSubarrBF(vector<int> nums, int k){
 }
 // intuition 2. hashing 
 /*
-will create a hash map with hash indexes as 0->n
+will create a hash map with hash indexes as the prefix - sums .. and the values are hash indexes . 
 //  arr : {10,5,2,7,1,9}
                    ->hashmap ->[0 ,1, 2, 3, 4, 5]
                                 |  |  |  |  |  |
-                                10,15,17,24,25,34  -> prefix sums against each index 
+                               [10,15,17,24,25,34]  -> prefix sums -> index against each value of i 
+                                10,15,->0 5,7,14,15 -> 0 
+                                instead of resetting to zero again and again 
+                                i can just subtract if a presum of total-k is found in the hashmap 
     if(hashmap[i]>=sum){} -> hashmap[sumIndex] ->> find subarrays that become k after using  
     i will take a prefix sum -> map[i] -> counter -> counter+arr[i];               
 */
 /*
    working of finding keys in the hashmap . cannot find if map.end() is not specified
 */
-void longestHash(){
-    map<string, int> mp;
+int longestHash(vector<int> arr,int k){
+    // vector<int> arr={10,5,2,7,1,9};
+    int n=arr.size();int count=0;
+    int maxlen=0;int rem=0;
+    map<int, int> mp;
+    for(int i=0;i<n;i++){
+        count+=arr[i];
+        if(count==k){
+            maxlen=max(maxlen,i+1);
+        }
+        rem=count-k;
+        if(mp.find(rem)!=mp.end()){
+            int len=i-mp[rem];
+            maxlen=max(maxlen,len);
+        }
+        if(mp.find(rem)==mp.end()){
+            mp[count]=i;
+        }
+    }
+    return maxlen;
+}
+
+/*
+our objective is to solve this problem using o(n);
+BEFORE PROCEEDING WITH THIS LEARN HOW TWO POINTERS AND SLIDING WINDOWS  WORK .
+*/
+int optimalSubArr(vector<int>arr ,int k){
+    int n=arr.size();
 
 }
 
@@ -65,6 +94,7 @@ int main(){
     int k=15;
     int BF_output= longestSubarrBF(nums,k);
     cout<<BF_output<<endl;
-    longestHash();
+    int hash_output=longestHash(nums,k);
+    cout<<"hash output : "<<hash_output;
 }
 
