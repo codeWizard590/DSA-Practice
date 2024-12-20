@@ -81,12 +81,34 @@ int longestHash(vector<int> arr,int k){
 }
 
 /*
-our objective is to solve this problem using o(n);
+our objective is to solve this problem using o(n) time and space;
 BEFORE PROCEEDING WITH THIS LEARN HOW TWO POINTERS AND SLIDING WINDOWS  WORK .
+*/
+/*
+what i want to do here is i want to take this array nums 
+{10,5,2,7,1,9} -> target =15;
+now i will take two pointers i and j -> i to iterate forward in every iteration and j to 
+shift by 1 if sum more than the target sum is achieved 
+i will subtract the sum from arr[j] -> j++ ;
+now by doing this i will be closing this window of the array and will get one subarray which is equal 
+to the target sum and has max length; 
 */
 int optimalSubArr(vector<int>arr ,int k){
     int n=arr.size();
-
+    int i=0,j=0,maxlength=0,count=0;
+    // {10,5,2,7,1,9};
+    while(i<n){
+        count+=arr[i]; // presum should be there 
+        if(count==k){
+            maxlength=max(maxlength,i-j+1);
+        }
+        while(count>k && j<=i){
+            count=count-arr[j];
+            j++;
+        }
+        i++;
+    }
+    return maxlength;
 }
 
 int main(){
@@ -95,6 +117,8 @@ int main(){
     int BF_output= longestSubarrBF(nums,k);
     cout<<BF_output<<endl;
     int hash_output=longestHash(nums,k);
-    cout<<"hash output : "<<hash_output;
+    cout<<"hash output : "<<hash_output<<endl;
+    int optimal_output=optimalSubArr(nums,k);
+    cout<<"optimal output : "<<optimal_output;
 }
 
