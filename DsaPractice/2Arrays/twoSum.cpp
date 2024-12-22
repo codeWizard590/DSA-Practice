@@ -60,7 +60,7 @@ vector<int> twoSum_Hash(vector<int> arr,int k){
         }
         mpp[arr[i]]=i; // at index 2 we have value 0 for the map.
     }
-    return {-1,-1};
+    return {-1,-1}; 
 
 }
 
