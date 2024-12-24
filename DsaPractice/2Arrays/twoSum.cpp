@@ -66,11 +66,70 @@ vector<int> twoSum_Hash(vector<int> arr,int k){
 
 /*
 Using sliding window / two pointers .
+the goal is to do this in complexity < O(n^2)
+now the intution is to sort the array first 
+1. After sorting we will check if the arr[i]+arr[j] < or > the targeted sum
+   if the arr sum is greater than the target we will know the cause as the larger element is causing the array sum to go up
+   if it is smaller we know that the smaller elment needs to be increment ed 
+   
+
+                                 DRY RUN 
+    first sort -> [2,5,6,8,11] -> i at 0 and j at 4 -> sum =13 -> < target increment i ++ ;
+    -> i at 1 j at 4  -> sum 16 > target  -- > decrement j -- ;
+    ->i at 1 j at 3 -> sum 13 < target --> increment i ++;
+    -> i at 2 and j at 3 sum 14 == target return i and j .
+    run these iterators until i<j ;                             
 */
 
+/* in this approach the indexes of the sorted array are passed so different from other solutions */
+
 vector<int> twoSum_window(vector<int> arr, int k){
-     
+    //  N = 5, arr[] = { 2,6,5,8,11}, target = 15
+    // -> 
+    vector<int> response;
+    int n=arr.size(),i=0,j=n-1;
+    sort(arr.begin(),arr.end());
+    while(i<j){
+        int sum=0;
+        sum=arr[i]+arr[j];
+        if(sum==k){
+            return{i,j};
+            break;
+        }
+        else if(sum>k){
+            j--;
+        }
+        else{
+            i++;
+        }
+    }
+    return {-1,1};
 }
+
+
+// cpoied from leetcode with least runtime 
+// public:
+//     vector<int> twoSum(vector<int>& nums, int target) {
+//         vector<int> sorted_nums = nums;
+//         sort(sorted_nums.begin(), sorted_nums.end());
+//         int si = 0;
+//         int sj = nums.size() - 1;
+//         while (si < sj) {
+//             if (sorted_nums[si] + sorted_nums[sj] > target) {
+//                 sj--;
+//             }
+//             if (sorted_nums[si] + sorted_nums[sj] < target) {
+//                 si++;
+//             }
+//             if (sorted_nums[si] + sorted_nums[sj] == target) {
+//                 break;
+//             }
+//         }
+//         int i = distance(nums.begin(),find(nums.begin(),nums.end(),sorted_nums[si]));
+//         int j = distance(find(nums.rbegin(),nums.rend(),sorted_nums[sj]),nums.rend()-1);
+//         return {i,j};
+//     }
+// };
 
 int main()
 {
@@ -78,7 +137,9 @@ int main()
     int target = 14;
     vector<int> BF_output = twoSum_BF(arr, target);
     vector<int> hash_output = twoSum_Hash(arr, target);
+    vector<int> twoSum_pointer = twoSum_window(arr, target);
     cout<<"brute force solution :" << BF_output[0] << " "<<BF_output[1]<<" "<<endl;
     cout<<"hash table solution :"<< hash_output[0] << " "<<hash_output[1]<<" "<<endl;
+    cout<<"pointer solution :"<< twoSum_pointer[0] << " "<<twoSum_pointer[1]<<" "<<endl;
     
 }
