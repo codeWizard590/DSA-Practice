@@ -43,14 +43,43 @@ class MaxSubarr{
                     recordedSum=max(maxSum,recordedSum);
                 }  
             }
-            cout<<recordedSum;
+            cout<<"Brute force Solution : "<<recordedSum<<endl;
         }
-        void maxSubarr_KA(vector<int> arr){
-            
+        void maxSubarr_KA(vector<int> nums){
+            // [-2,1,-3,4,-1,2,1,-5,4]
+            // first i want to check if the sum i am getting is less than zero 
+            // if it is there is no point in taking it forward as we donot take negatives into the future
+            // if sum is greater than the maxSum till that iteration we will replace the maxSum with the sum 
+            // now if i want to find out the indexes of the subarr ;
+            int n=nums.size();
+            int sum=0,maxSum=INT_MIN,itrStart=0,itrEnd=0;
+            for(int i=0;i<n;i++){
+                if(sum==0){
+                    itrStart=i;
+                }
+                sum+=nums[i];
+                // now one thing is sure that when sum ==0 this means that it is our starting index
+                //  of the new subarr iteration
+                if(sum>maxSum){
+                    maxSum=sum;
+                   
+                    itrEnd=i;
+                }
+                if(sum<0){
+                    // reinitalize the sum to zero
+                    sum=0;
+                    // maxSum=max(maxSum,sum);
+                }
+            }
+            cout<<"Using kadane's Algorithm : "<<maxSum<<endl;
+            for(int i=itrStart;i<=itrEnd;i++){
+                cout<<nums[i]<<" ";
+            }
         }
 };
 int main(){
     MaxSubarr maxSubarr;
     vector<int> arr={-2,1,-3,4,-1,2,1,-5,4};
     maxSubarr.maxsubarr_BF(arr);
+    maxSubarr.maxSubarr_KA(arr);
 }
