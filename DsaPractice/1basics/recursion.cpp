@@ -54,6 +54,14 @@ class Recursion{
 
        
 };
+
+class Backtracking{
+    public :
+        void subsets(vector<int> arr){
+           
+        }
+};
+
 int main(){
     Recursion recursion;
     int n;

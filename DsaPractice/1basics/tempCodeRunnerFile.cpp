@@ -1,1 +1,0 @@
-isSorted(arr,n-1);
