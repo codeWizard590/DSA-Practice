@@ -75,14 +75,14 @@ class BinarySearch{
         }
 };
 int main(){
-    vector<int> arr={1, 2, 3, 4, 6, 7, 8, 9};
+    vector<int> arr={2,3, 5, 6};
     BinarySearch binarysearch;
     int n=arr.size();
     int serachIndex=binarysearch.findX_iterative(arr,0,n-1,3);
     cout<<"using iterations : "<<serachIndex<<endl;
     int searchRecurse=binarysearch.findX_recursion(arr,0,n-1,7);
     cout<<"using recursion : "<<searchRecurse<<endl;
-    int lower_bound=binarysearch.lower_Bound(arr,0,n-1,3);
+    int lower_bound=binarysearch.lower_Bound(arr,0,n-1,1);
     cout<<"lower bound is : "<<lower_bound<<endl;
     int higher_bound=binarysearch.higher_bound(arr,0,n-1,3);
     cout<<"higher bound is : "<<higher_bound<<endl;

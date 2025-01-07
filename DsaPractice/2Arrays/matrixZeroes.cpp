@@ -214,7 +214,7 @@ public:
                 result.push_back(matrix[i][r]);
             }
             r--;
-            ;
+            
             if (u <= d)
             {
 

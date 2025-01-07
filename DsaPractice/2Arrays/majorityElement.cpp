@@ -123,13 +123,66 @@ public:
             cout << "no element exists " << endl;
         }
     }
+    
+    // https://leetcode.com/problems/majority-element-ii/description/
+    // Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times.
+    void majority3_BF(vector<int> arr){
+        int n=arr.size();
+        vector<int> result;
+       
+        for(int i=0;i<n;i++){
+            int count=0;
+            for(int j=i;j<n;j++){
+                if(arr[i]==arr[j]){
+                    count++;
+                }
+            }
+            if(count>n/3){
+                result.push_back(arr[i]);
+            }
+            
+        }
+        cout<<"majority 3 using brute force :[";
+        for(int i=0;i<result.size();i++){
+            cout<<result[i]<<" ";
+        }
+        cout<<"]";
+    }
+
+    void majority3_HT(vector<int> arr){
+        // using hashmap
+        vector<int> temparr;
+        int n=arr.size();
+        map<int,int> mpp;
+        for(int i=0;i<n;i++){
+            int value=arr[i];
+            mpp[value]+=1;            
+        }
+        for(auto it:mpp){
+            if(it.second>n/3){
+                temparr.push_back(it.first);
+            }
+        }
+        cout<<"using hashing : ";
+        for(int i=0;i<temparr.size();i++){
+            cout<<temparr[i]<<" ";
+        }
+    }
+
+    void majority3_OA(vector<int> arr){
+        
+    }
 };
 int main()
 {
     MajorityElement majorityElement;
-    vector<int> arr = {3, 2, 3};
+    vector<int> arr = {1, 2};
     int element = majorityElement.majority_BF(arr);
     cout << element << " " << endl;
     majorityElement.majority_BA(arr);
     majorityElement.majority_OA(arr);
+    cout<<endl;
+    majorityElement.majority3_BF(arr);
+    cout<<endl;
+    majorityElement.majority3_HT(arr);
 }

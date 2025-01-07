@@ -46,7 +46,7 @@ int longestSubarrBF(vector<int> nums, int k){
 /*
 will create a hash map with hash indexes as the prefix - sums .. and the values are hash indexes . 
 //  arr : {10,5,2,7,1,9}
-                   ->hashmap ->[0 ,1, 2, 3, 4, 5]
+                   ->hashmap -> 0 ,1, 2, 3, 4, 5
                                 |  |  |  |  |  |
                                [10,15,17,24,25,34]  -> prefix sums -> index against each value of i 
                                 10,15,->0 5,7,14,15 -> 0 
@@ -73,7 +73,7 @@ int longestHash(vector<int> arr,int k){
             int len=i-mp[rem];
             maxlen=max(maxlen,len);
         }
-        if(mp.find(rem)==mp.end()){
+        if(mp.find(count)==mp.end()){
             mp[count]=i;
         }
     }
@@ -87,7 +87,7 @@ BEFORE PROCEEDING WITH THIS LEARN HOW TWO POINTERS AND SLIDING WINDOWS  WORK .
 /*
 what i want to do here is i want to take this array nums 
 {10,5,2,7,1,9} -> target =15;
-now i will take two pointers i and j -> i to iterate forward in every iteration and j to 
+now i will take two pointers i and j -> i to  iterate forward in every iteration and j to 
 shift by 1 if sum more than the target sum is achieved 
 i will subtract the sum from arr[j] -> j++ ;
 now by doing this i will be closing this window of the array and will get one subarray which is equal 
