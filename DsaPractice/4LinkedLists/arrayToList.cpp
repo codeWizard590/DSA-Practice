@@ -13,7 +13,7 @@ class Node{
             ptr=nullptr;
         }
 };
-
+ 
 Node* arrToLL(int arr[]){
     Node* head=new Node(arr[0]);
     Node* mover=head;
