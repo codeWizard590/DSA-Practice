@@ -40,4 +40,13 @@ int main(){
     root->right = new Node(3);
     root->left->left = new Node(4);
     root->left->right = new Node(5);
+    vector<vector<int>> arr=levelOrderTraversal(root);
+    int n=arr.size();
+    cout<<"hii";
+    for(int i=0;i<n;i++){
+        int m=arr[i].size();
+        for(int j=0;j<m;j++){
+            cout<<arr[i][j]<<" ";
+        }
+    }
 }
