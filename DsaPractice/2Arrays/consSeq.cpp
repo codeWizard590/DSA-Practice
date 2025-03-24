@@ -47,7 +47,7 @@ class ConsSequence{
             // if there is noone smaller than that element we will try to find elements which are larger than that number 
             unordered_set<int> st;
             int n=nums.size();
-            int longest=1;
+            int longest=1; 
             // i am iterating through the array and putting my elements inside this set .
             if(nums.size()==0){
                 return 0;
